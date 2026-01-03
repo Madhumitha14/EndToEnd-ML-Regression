@@ -4,7 +4,7 @@ Feature engineering: date parts, frequency encoding, target encoding, drop leaka
 - Reads cleaned train/eval CSVs
 - Applies feature engineering
 - Saves feature-engineered CSVs
-- ALSO saves fitted encoders for inference
+- Saves fitted encoders for inference
 """
 
 from pathlib import Path
@@ -80,12 +80,14 @@ def run_feature_engineering(
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Defaults for inputs
+        # Defaults for inputs (derive from output_dir)
     if in_train_path is None:
-        in_train_path = PROCESSED_DIR / "cleaning_train.csv"
+        in_train_path = output_dir / "cleaning_train.csv"
     if in_eval_path is None:
-        in_eval_path = PROCESSED_DIR / "cleaning_eval.csv"
+        in_eval_path = output_dir / "cleaning_eval.csv"
     if in_holdout_path is None:
-        in_holdout_path = PROCESSED_DIR / "cleaning_holdout.csv"
+        in_holdout_path = output_dir / "cleaning_holdout.csv"
+
 
     train_df = pd.read_csv(in_train_path)
     eval_df = pd.read_csv(in_eval_path)
