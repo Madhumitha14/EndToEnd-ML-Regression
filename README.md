@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Housing Regression MLE is an end-to-end machine learning pipeline for predicting housing prices using XGBoost. The project follows ML engineering best practices with modular pipelines, experiment tracking via MLflow, containerization, AWS cloud deployment, and comprehensive testing. The system includes both a REST API and a Streamlit dashboard for interactive predictions.
+This is an end-to-end machine learning pipeline for predicting housing prices using XGBoost. The project follows ML engineering best practices with modular pipelines, experiment tracking via MLflow, containerization, AWS cloud deployment, and comprehensive testing. The system includes both a REST API and a Streamlit dashboard for interactive predictions.
 
 ## Architecture
 
@@ -145,29 +145,6 @@ docker run -p 8501:8501 housing-streamlit
 # Start MLflow UI (view experiments)
 mlflow ui
 ```
-
-## Key Design Patterns
-
-### Pipeline Modularity
-Each pipeline component can be run independently with consistent interfaces. All modules accept configurable input/output paths for testing isolation.
-
-### Cloud-Native Architecture
-- **S3-First Storage**: Models and data automatically sync from S3 buckets
-- **Containerized Services**: Both API and dashboard run in Docker containers  
-- **Auto-scaling Infrastructure**: ECS Fargate provides serverless container scaling
-- **Environment-based Configuration**: Separate configs for local development and production
-
-### Encoder Persistence  
-Frequency and target encoders are saved as pickle files during training and loaded during inference to ensure consistent transformations.
-
-### Configuration Management
-Model parameters, file paths, and pipeline settings use sensible defaults but can be overridden through function parameters or environment variables. Production deployments use AWS environment variables.
-
-### Testing Strategy
-- Unit tests for individual pipeline components
-- Integration tests for end-to-end pipeline flows  
-- Smoke tests for inference pipeline
-- All tests use temporary directories to avoid touching production data
 
 ## Dependencies
 
